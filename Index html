@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ar">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>انضم إلى مجموعتنا على واتساب</title>
+  <meta name="description" content="اضغط على الزر أدناه للانضمام مباشرة إلى مجموعتنا على واتساب" />
+  <style>
+    :root {
+      --bg: #f3f8f5;
+      --card: #ffffff;
+      --accent: #25D366;
+      --accent-dark: #1ea857;
+      --text: #0b1220;
+    }
+    body {
+      font-family: "Tajawal", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .card {
+      background: var(--card);
+      max-width: 720px;
+      width: 100%;
+      border-radius: 18px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+      padding: 32px;
+      display: grid;
+      gap: 20px;
+      text-align: center;
+      animation: fadeIn 1s ease;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    h1 {
+      margin: 0;
+      font-size: 1.6rem;
+      color: var(--accent-dark);
+    }
+    p {
+      margin: 0;
+      color: #475569;
+      line-height: 1.7;
+    }
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 22px;
+      border-radius: 12px;
+      background: var(--accent);
+      color: white;
+      font-size: 1.05rem;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all .2s;
+    }
+    .btn:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(37,211,102,0.3);
+    }
+    .note {
+      font-size: 0.9rem;
+      color: #64748b;
+    }
+    img {
+      margin: 10px auto;
+      border-radius: 10px;
+    }
+    footer {
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>انضم إلى مجموعتنا على واتساب 📱</h1>
+    <p>اذا أردت الإستمرار للشرح و الإستفسار عبر الواتساب المرجو الضغط هنا.</p>
+
+    <img id="qrImage" src="" alt="رمز QR للانضمام" width="150" height="150" />
+
+    <a id="joinBtn" class="btn" href="#">واتساب 🚀</a>
+
+    <p class="note">
+      إذا لم يفتح التطبيق تلقائيًا، انسخ الرابط وافتحه في المتصفح أو من خلال واتساب ويب.
+    </p>
+
+    <footer>© 2025 - رابط الانضمام إلى مجموعة واتساب الخاصة بنا</footer>
+  </div>
+
+  <script>
+    // 🟢 group ID ديالك
+    const groupId = "HPjnQydvZCNFEjYVWAt1K0";
+    const inviteUrl = `https://chat.whatsapp.com/HPjnQydvZCNFEjYVWAt1K0`;
+
+    const joinBtn = document.getElementById("joinBtn");
+    joinBtn.href = inviteUrl;
+
+    // 🟩 توليد QR code
+    const qrSrc = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent(inviteUrl);
+    document.getElementById("qrImage").src = qrSrc;
+
+    // 📱 فتح التطبيق مباشرة فالموبايل
+    function openWhatsAppApp() {
+      const isMobile = /iphone|ipod|ipad|android|blackberry|windows phone|opera mini/i.test(navigator.userAgent);
+      if (!isMobile) return;
+      const appLink = `whatsapp://chat?code=${groupId}`;
+      window.location = appLink;
+      setTimeout(() => { window.location = inviteUrl; }, 1200);
+    }
+
+    joinBtn.addEventListener("click", function(e){
+      if (/iphone|ipod|ipad|android|blackberry|windows phone|opera mini/i.test(navigator.userAgent)) {
+        e.preventDefault();
+        openWhatsAppApp();
+      }
+    });
+  </script>
+</body>
+</html>
